@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    protected $fillable = ['user_id', 'message'];
+    protected $fillable = ['user_id', 'message', 'tags'];
 
-    public function tags()
+    //protected $table = 'note_tags';
+    public function tag()
     {
-    	return $this->belongsToMany(Tags::class);
+    	return $this->belongsToMany(Tag::class, 'note_tags', 'note_id','tags_id');
     }
 }

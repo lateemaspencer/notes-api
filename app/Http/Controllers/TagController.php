@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Tags;
+use App\Tag;
 use Illuminate\Http\Request;
 
-class TagsController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,7 +44,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function show(Tags $tags)
+    public function show(Tag $tag)
     {
         //
     }
@@ -55,7 +55,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tags $tags)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -67,7 +67,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tags $tags)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -78,7 +78,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tags $tags)
+    public function destroy(Tag $tag)
     {
         //
     }

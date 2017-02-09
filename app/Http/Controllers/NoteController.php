@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Note;
 use Illuminate\Http\Request;
 
@@ -27,24 +28,26 @@ class NoteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $user_id)
     {
-        //
+        $note = new Note;
+        $note->user_id = $user_id;
+        $note->message = $request->input('message');
+        $note->save();
+
+        $new_tags = explode(',', $request->input('tags'));
+       
+        foreach($new_tags as $tag)
+        {
+            $new_tag = new Tag;
+            $new_tag->tag_title = $tag;
+            $new_tag->save();
+        }
     }
 
     /**
@@ -53,20 +56,11 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show($user_id, $note_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Note $note)
-    {
-        //
+        $test = Note::find($note_id);
+        $note = Note::findorFail($note_id);
+        return $note;
     }
 
     /**
@@ -76,9 +70,26 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update(Request $request, $user_id, $note_id)
     {
-        //
+        $note = Note::findorFail($note_id);
+        $tags = $note->tag;
+        //return $tags;
+        $note->message = $request->input('message');
+        $new_tags = explode(',', $request->input('tags'));
+       
+        foreach($new_tags as $tag)
+        {
+            if(count(Tag::where('tag_title', $tag)->get()))
+            {
+                Tag::where('tag_title', $tag)->delete();
+            }
+            $new_tag = new Tag;
+            $new_tag->tag_title = $tag;
+            $new_tag->save();
+        }
+        
+        return $tags;
     }
 
     /**
@@ -87,8 +98,9 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy($user_id, $note_id)
     {
-        //
+        $note = Note::findorFail($note_id);
+        $note->destroy($note_id);
     }
 }

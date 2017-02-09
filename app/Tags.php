@@ -8,13 +8,8 @@ class Tag extends Model
 {
     protected $fillable = ['tag_title'];
 
-    public function note()
+    public function notes()
     {
-    	return $this->belongsToMany(Note::class);
-    }
-
-    public function getRouteKeyName()
-    {
-    	return 'tag_title';
+    	return $this->belongsToMany('App\Note', 'note_tags', 'note_id', 'tags_id');
     }
 }

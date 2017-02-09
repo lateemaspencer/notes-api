@@ -11,5 +11,6 @@
 |
 */
 Route::group(['after' => 'no-cache', 'prefix' => 'api/v1/'], function(){
-	Route::resource('/user/{user_id}/note/{note_id?}', 'NoteController');
+	Route::resource('/user/{user_id}/note', 'NoteController', array('only' => array('index' , 'store', 'show', 'update', 'destroy')));
+	Route::get('user/{user_id}/note/{note_id}', 'NoteController@show');
 });
