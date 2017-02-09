@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['after' => 'no-cache', 'prefix' => 'api/v1'], function(){
-	Route::get('/note', function () {
-	    return view('welcome');
-	});
+Route::group(['after' => 'no-cache', 'prefix' => 'api/v1/'], function(){
+	Route::resource('/user/{user_id}/note/{note_id?}', 'NoteController');
 });
