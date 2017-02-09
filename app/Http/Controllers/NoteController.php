@@ -14,7 +14,26 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return "hello";
+        $notes = Note::all();
+
+        return response()->json(
+            array(
+                'status' => 'Success',
+                'notes' => $notes->toArray()
+            ),
+            200
+        );
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -23,9 +42,9 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        return $note_id;
+        //
     }
 
     /**
@@ -35,6 +54,17 @@ class NoteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Note $note)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Note $note)
     {
         //
     }
