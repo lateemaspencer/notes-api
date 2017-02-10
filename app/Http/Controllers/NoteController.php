@@ -76,6 +76,8 @@ class NoteController extends Controller
         $tags = $note->tag;
         
         $note->message = $request->input('message');
+        $note->save();
+        
         $new_tags = explode(',', $request->input('tags'));
        
         foreach($new_tags as $tag)
