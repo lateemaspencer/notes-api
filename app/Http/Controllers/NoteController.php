@@ -74,7 +74,7 @@ class NoteController extends Controller
     {
         $note = Note::findorFail($note_id);
         $tags = $note->tag;
-        //return $tags;
+        
         $note->message = $request->input('message');
         $new_tags = explode(',', $request->input('tags'));
        
@@ -89,7 +89,7 @@ class NoteController extends Controller
             $new_tag->save();
         }
         
-        return $tags;
+        return $note;
     }
 
     /**
